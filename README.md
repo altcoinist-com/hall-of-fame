@@ -10,10 +10,9 @@ Two jobs:
 
 ## Deployment
 
-**Repo:** https://github.com/chichi-png/hall-of-fame — auto-deploys to **Vercel** on push to `master`.
-Routing (clean URLs, rewrites, redirects) is in `vercel.json`.
+**Source repository:** [altcoinist-com/hall-of-fame](https://github.com/altcoinist-com/hall-of-fame).
 
-**Live:** https://altcoinist-affiliate.vercel.app
+**Publishing surface:** GitHub Pages. Confirm the configured public URL and publishing branch in the repository’s Pages settings before sharing a link. This repository is standalone and has no affiliates parent pointer.
 
 **Routes:**
 | URL | Page |
@@ -41,7 +40,7 @@ hall-of-fame/
 │   └── tier-cards/{character}/{tier}.png  # reputation character art (5 chars × 5 tiers)
 ├── generate-og-card.py    # regenerates all share cards + c/ pages from hall-data.json
 ├── import-tier-cards.py   # imports + optimizes the 25 tier cards from Konsti's source folder
-└── vercel.json
+└── refresh-hall.py        # historical snapshot refresh helper
 ```
 
 ## Data
@@ -66,7 +65,7 @@ hall-of-fame/
 }
 ```
 
-> **Live data is the v19.8 reputation snapshot** (`repScore` = display_score, 0–100, floor 40).
+> **Historical data snapshot:** the bundled v19.8 reputation data reflects May 29, 2026 (`repScore` = display_score, 0–100, floor 40). It is not live data.
 > `repTier` is `null` everywhere and the Hall shows the **number, not a letter** — this matches
 > the app, which dropped A+→D letter tiers in v15. Letters would be a fresh design decision
 > (pick the score→grade cutoffs with Conor/Spyro), not something the scoring emits.
@@ -74,7 +73,7 @@ hall-of-fame/
 
 ## Refreshing scores (the data pipeline)
 
-Scores come from Conor/Spyro's **v19.8 caller-reputation board**. The board identifies callers
+The historical snapshot came from a **v19.8 caller-reputation board**. The board identifies callers
 by an **internal name** (a TG/caller handle, e.g. `cryptocchio0`), not the X handle the Hall shows
 (`@mrLCguy`). `refresh-hall.py` bridges that gap and updates everything in one command.
 
@@ -98,9 +97,7 @@ identities. Keep it local. It was seeded by score-matching the May-29 board (dis
 all-time calls — a unique match across all 21 scored). Set `verified: true` per row after eyeballing.
 Regenerable from any board if lost.
 
-**Where the board comes from:** re-run `score_v198.py` in the `4-signals` handover folder against a
-fresh data dump, or read live from the app's scores DB. Either produces the board `refresh-hall.py`
-consumes. See `5-growth-funnel/4-signals/spyro-workspace/research/v19.8-scoring-handover-2026-05-29/`.
+**Refreshing data:** obtain a current approved source through the owner named in Marketing context before using `refresh-hall.py`. The former handover path is historical evidence and is not a current source of truth.
 
 ## Share cards (Open Graph)
 
@@ -126,14 +123,16 @@ Rebuilds `og-hall.png`, every `assets/cards/{handle}.png`, and every `c/{handle}
 1. Add their picture to `avatars/{handle}.jpg`.
 2. Add / edit their entry in `hall-data.json`.
 3. Run `python generate-og-card.py`.
-4. Commit + push (see below).
+4. Review generated outputs. Commit or publish only with the required authorization.
 
 ## Design
 
 Black canvas, Inter for headings, JetBrains Mono for labels. A+ tier gets a verified ring +
 badge (mirrors the X badge). Edit design tokens once in `styles/hall.css` and every page updates.
 
-**Tier colors mirror the mini app** (locked — see `../../docs/reputation-tier-colors.md`):
+Tier colors are implementation tokens in this repository. Before changing
+them, follow the Marketing design-system route in `AGENTS.md` and verify the
+current Mini App source of truth:
 
 | Tier | Color | Hex |
 |---|---|---|
@@ -159,8 +158,6 @@ python import-tier-cards.py "/path/to/Tier Cards characters"
 Normalizes the inconsistent source filenames, resizes to web size, and writes
 `assets/tier-cards/{character}/{tier}.png`. Requires Pillow.
 
-## Push (dual-push)
+## Repository boundary
 
-This is a git submodule of `1-affiliates`. After any change:
-1. Commit + push here (deploys to Vercel).
-2. Bump the submodule pointer in the parent `1-affiliates` repo and push that too.
+This is the standalone [altcoinist-com/hall-of-fame](https://github.com/altcoinist-com/hall-of-fame) repository. GitHub Pages is its publishing surface. There is no affiliates-submodule pointer to update.
