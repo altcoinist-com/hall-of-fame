@@ -4,8 +4,8 @@ This standalone application repository owns the Hall implementation and historic
 
 ## Authority routes
 
-- In the Growth Hub, start shared Growth work at `../../context/README.md`, then load the needed `CURRENT.md`, `MESSAGING.md`, `TEAM.md`, or `IDS.md`.
-- In a standalone checkout, use the [Marketing context catalogue](https://github.com/altcoinist-com/3-marketing/blob/main/context/README.md), [current scope](https://github.com/altcoinist-com/3-marketing/blob/main/context/CURRENT.md), [messaging](https://github.com/altcoinist-com/3-marketing/blob/main/context/MESSAGING.md), [team](https://github.com/altcoinist-com/3-marketing/blob/main/context/TEAM.md), and [IDs](https://github.com/altcoinist-com/3-marketing/blob/main/context/IDS.md).
+- In the Growth Hub, start shared Growth work at `../../context/README.md`, then load the needed `CURRENT.md`, `POSITIONING.md`, `TEAM.md`, or `IDS.md`.
+- In a standalone checkout, use the [Marketing context catalogue](https://github.com/altcoinist-com/3-marketing/blob/main/context/README.md), [current scope](https://github.com/altcoinist-com/3-marketing/blob/main/context/CURRENT.md), [positioning](https://github.com/altcoinist-com/3-marketing/blob/main/context/POSITIONING.md), [team](https://github.com/altcoinist-com/3-marketing/blob/main/context/TEAM.md), and [IDs](https://github.com/altcoinist-com/3-marketing/blob/main/context/IDS.md).
 - `hall-data.json` contains a historical May 2026 reputation snapshot. It is not a live leaderboard or a source of current affiliate, Product, or scoring decisions.
 
 ## Repository topology
